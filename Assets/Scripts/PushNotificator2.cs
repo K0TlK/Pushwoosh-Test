@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PushNotificator2 : MonoBehaviour
 {
     [SerializeField] private string _applicationCode = "ENTER_PUSHWOOSH_APP_ID_HERE";
+    [SerializeField] private TMP_Text _textHWID;
 
     private void Start()
     {
@@ -29,7 +31,7 @@ public class PushNotificator2 : MonoBehaviour
 
     void OnRegisteredForPushNotifications(string token)
     {
-        Debug.Log("[PushNotificator] Received token: \n" + token);
+        Debug.Log("[PushNotificator] Application Code: " + _applicationCode);
         Debug.Log("[PushNotificator] HWID: " + Pushwoosh.Instance.HWID);
         Debug.Log("[PushNotificator] PushToken: " + Pushwoosh.Instance.PushToken);
 
@@ -39,6 +41,7 @@ public class PushNotificator2 : MonoBehaviour
             Debug.Log("Tags: " + json);
         });
         Debug.Log(Pushwoosh.Instance.GetRemoteNotificationStatus());
+        _textHWID.text = Pushwoosh.Instance.HWID;
     }
 
     void OnFailedToRegisteredForPushNotifications(string error)
