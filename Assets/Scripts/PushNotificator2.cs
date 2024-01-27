@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,8 +7,9 @@ public class PushNotificator2 : MonoBehaviour
 {
     [SerializeField] private string _applicationCode = "ENTER_PUSHWOOSH_APP_ID_HERE";
     [SerializeField] private TMP_Text _textHWID;
+    [SerializeField] private TMP_Text _textLatPush;
 
-    private void Start()
+    private void Awake()
     {
         Initialize_WHITEOUT();
     }
@@ -24,9 +26,6 @@ public class PushNotificator2 : MonoBehaviour
         Pushwoosh.Instance.SetBadgeNumber(0);
 
         Pushwoosh.Instance.RegisterForPushNotifications();
-
-        Pushwoosh.Instance.SetIntTag("Subscription purchased", 0);
-        Debug.Log("[Pushwoosh] InitializationManager: SetIntTag: Subscription purchased, 0");
     }
 
     void OnRegisteredForPushNotifications(string token)
@@ -52,5 +51,6 @@ public class PushNotificator2 : MonoBehaviour
     void OnPushNotificationsReceived(string payload)
     {
         Debug.Log("[PushNotificator] Received push notificaiton: \n" + payload);
+        _textLatPush.text = $"Last Push: {DateTime.Now} || {payload}";
     }
 }

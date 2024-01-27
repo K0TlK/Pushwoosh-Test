@@ -12,15 +12,7 @@ namespace Integrations_WHITEOUT
 
         private void Awake()
         {
-            //Initialize_WHITEOUT();
-        }
-
-        public void Initialize(bool isInit)
-        {
-            if (isInit)
-            {
-                Initialize_WHITEOUT();
-            }
+            Initialize_WHITEOUT();
         }
 
         private void Initialize_WHITEOUT()
@@ -45,7 +37,6 @@ namespace Integrations_WHITEOUT
 
             DontDestroyOnLoad(adjustObject);
             RequestTrackingAuthorization_WHITEOUT();
-            Destroy(gameObject);
         }
 
         private void RequestTrackingAuthorization_WHITEOUT()
